@@ -441,6 +441,38 @@
             cursor: pointer;
             font-size: 11px;
         }
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fafafa;
+            margin-bottom: 12px;
+        }
+        .upload-area:hover {
+            border-color: var(--p);
+            background: #f0fdfa;
+        }
+        .upload-area .icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+        .upload-area p {
+            font-size: 13px;
+            color: var(--g);
+        }
+        .preview-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 8px auto;
+            display: none;
+            border: 2px solid #e2e8f0;
+        }
         /* Login */
         .login-overlay {
             position: fixed;
@@ -506,9 +538,6 @@
             }
             .pc .info h3 {
                 font-size: 12px;
-            }
-            .pc .info .price {
-                font-size: 14px;
             }
             .cs {
                 width: 100%;
@@ -640,21 +669,50 @@
     <div class="ap" id="adminPanel">
         <h2>🔐 لوحة التحكم</h2>
         <button class="btn-save" style="background:#ef4444;margin-bottom:12px;" onclick="logoutAdmin()">🚪 تسجيل الخروج</button>
+        
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div>
                 <h3>➕ إضافة منتج</h3>
-                <div class="f-g"><label>الاسم</label><input type="text" id="aname"></div>
+                
+                <!-- منطقة رفع الصورة -->
+                <div class="f-g">
+                    <label>📸 صورة المنتج</label>
+                    <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+                        <div class="icon">📁</div>
+                        <p>اضغط لاختيار صورة</p>
+                        <p style="font-size:11px;color:#94a3b8;">سيتم حفظها باسم المنتج تلقائياً</p>
+                    </div>
+                    <input type="file" id="imageUpload" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+                    <img id="imagePreview" class="preview-img" alt="معاينة الصورة">
+                    <p style="font-size:11px;color:var(--g);margin-top:4px;">
+                        💡 اسم الملف سيكون: <strong id="expectedFileName">اسم_المنتج.jpg</strong>
+                    </p>
+                </div>
+                
+                <div class="f-g"><label>اسم المنتج</label><input type="text" id="aname" oninput="updateExpectedFileName()"></div>
                 <div class="f-g"><label>التصنيف</label><select id="acat"><option value="medications">أدوية</option><option value="supplements">مكملات</option><option value="skincare">عناية</option><option value="medical-supplies">مستلزمات</option><option value="baby-care">أطفال</option></select></div>
-                <div class="f-g"><label>رابط الصورة</label><input type="text" id="aimg" placeholder="اختياري"></div>
-                <div class="f-g"><label>السعر (ريال)</label><input type="number" id="aprice"></div>
-                <div class="f-g"><label>سعر الجملة</label><input type="number" id="awholesale" placeholder="اختياري"></div>
+                <div class="f-g"><label>السعر (ريال يمني)</label><input type="number" id="aprice"></div>
+                <div class="f-g"><label>سعر الجملة (اختياري)</label><input type="number" id="awholesale" placeholder="للمنتجات غير ثابتة السعر"></div>
                 <div class="f-g"><label>الوصف</label><textarea id="adesc" rows="2"></textarea></div>
                 <div class="f-g"><label>النشرة الدوائية</label><textarea id="apamphlet" rows="2"></textarea></div>
-                <button class="btn-save" onclick="saveProduct()">💾 حفظ</button>
+                <button class="btn-save" onclick="saveProduct()">💾 حفظ المنتج</button>
             </div>
             <div>
-                <h3>📋 المنتجات</h3>
+                <h3>📋 المنتجات الحالية</h3>
                 <div id="adminList" style="max-height:400px;overflow-y:auto;"></div>
+                
+                <div style="margin-top:16px;padding:12px;background:#fef3c7;border-radius:8px;font-size:12px;">
+                    <strong>📁 هيكل المجلدات:</strong>
+                    <pre style="background:#1e293b;color:#e2e8f0;padding:8px;border-radius:6px;margin-top:6px;direction:ltr;text-align:left;">
+wheeb-pharma/
+├── index.html
+├── images/
+│   ├── بنادول_أزرق.jpg
+│   ├── فيتامين_د3.jpg
+│   └── ...
+                    </pre>
+                    <p style="margin-top:6px;">💡 ضع الصور في مجلد <strong>images/</strong> بنفس اسم المنتج (مع استبدال المسافات بـ _)</p>
+                </div>
             </div>
         </div>
     </div>
@@ -666,18 +724,18 @@
 <script>
 // ========== بيانات المنتجات ==========
 const defaultProducts = [
-    {id:1,name:'بنادول أزرق',category:'medications',image:'https://dummyimage.com/300x300/0d9488/fff&text=Panadol',priceRetail:450,priceWholesale:380,desc:'مسكن ألم وخافض حرارة',pamphlet:'باراسيتامول 500mg. قرصين كل 6 ساعات.',fixedPrice:false},
-    {id:2,name:'فيتامين د3',category:'supplements',image:'https://dummyimage.com/300x300/f59e0b/fff&text=Vit+D3',priceRetail:650,priceWholesale:550,desc:'مكمل غذائي للعظام',pamphlet:'كبسولة يومياً مع الطعام.',fixedPrice:false},
-    {id:3,name:'كريم سيتافيل',category:'skincare',image:'https://dummyimage.com/300x300/8b5cf6/fff&text=Cetaphil',priceRetail:890,desc:'مرطب للبشرة الجافة',pamphlet:'خالي من العطور. يستخدم يومياً.',fixedPrice:true},
-    {id:4,name:'جهاز ضغط',category:'medical-supplies',image:'https://dummyimage.com/300x300/ef4444/fff&text=BP',priceRetail:1990,priceWholesale:1700,desc:'جهاز إلكتروني',pamphlet:'دقيق ±3 mmHg. ضمان سنتين.',fixedPrice:false},
-    {id:5,name:'حليب نان 1',category:'baby-care',image:'https://dummyimage.com/300x300/10b981/fff&text=NAN',priceRetail:750,priceWholesale:650,desc:'للرضع 0-6 شهور',pamphlet:'يحضر بخلط ملعقة مع 30مل ماء.',fixedPrice:false},
-    {id:6,name:'أوميغا 3',category:'supplements',image:'https://dummyimage.com/300x300/3b82f6/fff&text=Omega3',priceRetail:950,priceWholesale:800,desc:'زيت سمك مركز',pamphlet:'كبسولتين يومياً.',fixedPrice:false},
-    {id:7,name:'واقي شمس',category:'skincare',image:'https://dummyimage.com/300x300/f97316/fff&text=SPF50',priceRetail:1200,desc:'حماية عالية',pamphlet:'SPF50+. خالي من الزيوت.',fixedPrice:true},
-    {id:8,name:'إبر أنسولين',category:'medical-supplies',image:'https://dummyimage.com/300x300/6366f1/fff&text=Insulin',priceRetail:550,priceWholesale:450,desc:'100 إبرة دقيقة',pamphlet:'للاستخدام الواحد. معقمة.',fixedPrice:false},
-    {id:9,name:'شراب بروسبان',category:'medications',image:'https://dummyimage.com/300x300/14b8a6/fff&text=Prospan',priceRetail:320,priceWholesale:260,desc:'مستخلص اللبلاب',pamphlet:'5مل ثلاث مرات يومياً.',fixedPrice:false},
-    {id:10,name:'مغنيسيوم',category:'supplements',image:'https://dummyimage.com/300x300/a855f7/fff&text=Mag',priceRetail:700,priceWholesale:580,desc:'جليسينات 400mg',pamphlet:'قرص مساءً للعضلات.',fixedPrice:false},
-    {id:11,name:'حفائظ أطفال',category:'baby-care',image:'https://dummyimage.com/300x300/ec4899/fff&text=Diapers',priceRetail:850,priceWholesale:720,desc:'مقاس 3 - 56 حبة',pamphlet:'طبقة ماصة جافة.',fixedPrice:false},
-    {id:12,name:'جهاز بخار',category:'medical-supplies',image:'https://dummyimage.com/300x300/64748b/fff&text=Nebulizer',priceRetail:2500,priceWholesale:2100,desc:'نبيولايزر للأطفال',pamphlet:'ضمان 3 سنوات.',fixedPrice:false}
+    {id:1,name:'بنادول أزرق',category:'medications',priceRetail:450,priceWholesale:380,desc:'مسكن ألم وخافض حرارة',pamphlet:'باراسيتامول 500mg. قرصين كل 6 ساعات.',fixedPrice:false},
+    {id:2,name:'فيتامين د3',category:'supplements',priceRetail:650,priceWholesale:550,desc:'مكمل غذائي للعظام',pamphlet:'كبسولة يومياً مع الطعام.',fixedPrice:false},
+    {id:3,name:'كريم سيتافيل',category:'skincare',priceRetail:890,desc:'مرطب للبشرة الجافة',pamphlet:'خالي من العطور. يستخدم يومياً.',fixedPrice:true},
+    {id:4,name:'جهاز ضغط الدم',category:'medical-supplements',priceRetail:1990,priceWholesale:1700,desc:'جهاز إلكتروني',pamphlet:'دقيق ±3 mmHg. ضمان سنتين.',fixedPrice:false},
+    {id:5,name:'حليب نان 1',category:'baby-care',priceRetail:750,priceWholesale:650,desc:'للرضع 0-6 شهور',pamphlet:'يحضر بخلط ملعقة مع 30مل ماء.',fixedPrice:false},
+    {id:6,name:'أوميغا 3',category:'supplements',priceRetail:950,priceWholesale:800,desc:'زيت سمك مركز',pamphlet:'كبسولتين يومياً.',fixedPrice:false},
+    {id:7,name:'واقي شمس',category:'skincare',priceRetail:1200,desc:'حماية عالية',pamphlet:'SPF50+. خالي من الزيوت.',fixedPrice:true},
+    {id:8,name:'إبر أنسولين',category:'medical-supplies',priceRetail:550,priceWholesale:450,desc:'100 إبرة دقيقة',pamphlet:'للاستخدام الواحد. معقمة.',fixedPrice:false},
+    {id:9,name:'شراب بروسبان',category:'medications',priceRetail:320,priceWholesale:260,desc:'مستخلص اللبلاب',pamphlet:'5مل ثلاث مرات يومياً.',fixedPrice:false},
+    {id:10,name:'مغنيسيوم',category:'supplements',priceRetail:700,priceWholesale:580,desc:'جليسينات 400mg',pamphlet:'قرص مساءً للعضلات.',fixedPrice:false},
+    {id:11,name:'حفائظ أطفال',category:'baby-care',priceRetail:850,priceWholesale:720,desc:'مقاس 3 - 56 حبة',pamphlet:'طبقة ماصة جافة.',fixedPrice:false},
+    {id:12,name:'جهاز بخار',category:'medical-supplies',priceRetail:2500,priceWholesale:2100,desc:'نبيولايزر للأطفال',pamphlet:'ضمان 3 سنوات.',fixedPrice:false}
 ];
 
 // ========== الحالة ==========
@@ -685,10 +743,71 @@ let products = JSON.parse(localStorage.getItem('wp_products')) || [...defaultPro
 let cart = JSON.parse(localStorage.getItem('wp_cart')) || [];
 let currentCategory = 'all';
 let isAdmin = false;
+let uploadedImageData = null;
 
 // ========== إعدادات المسؤول ==========
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'wheeb2026';
+
+// ========== دوال الصور ==========
+function getProductImagePath(productName) {
+    // تحويل اسم المنتج إلى اسم ملف صورة
+    const fileName = productName.replace(/\s+/g, '_') + '.jpg';
+    return 'images/' + fileName;
+}
+
+function getProductImage(product) {
+    // التحقق من وجود صورة محملة محلياً
+    const localPath = getProductImagePath(product.name);
+    
+    // إذا كان هناك صورة محملة مسبقاً (base64)
+    if (product.imageData) {
+        return product.imageData;
+    }
+    
+    // محاولة تحميل الصورة المحلية
+    return localPath;
+}
+
+function getFallbackImage(productName) {
+    return 'https://dummyimage.com/300x300/0d9488/ffffff&text=' + encodeURIComponent(productName.substring(0, 15));
+}
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // التحقق من نوع الملف
+    if (!file.type.startsWith('image/')) {
+        toast('⚠️ الرجاء اختيار ملف صورة');
+        return;
+    }
+    
+    // التحقق من الحجم (أقصى حد 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+        toast('⚠️ حجم الصورة كبير جداً (الحد الأقصى 5MB)');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        uploadedImageData = e.target.result;
+        document.getElementById('imagePreview').src = uploadedImageData;
+        document.getElementById('imagePreview').style.display = 'block';
+        toast('✅ تم تحميل الصورة بنجاح');
+    };
+    reader.readAsDataURL(file);
+}
+
+function updateExpectedFileName() {
+    const name = document.getElementById('aname').value.trim();
+    if (name) {
+        const fileName = name.replace(/\s+/g, '_') + '.jpg';
+        document.getElementById('expectedFileName').textContent = fileName;
+    } else {
+        document.getElementById('expectedFileName').textContent = 'اسم_المنتج.jpg';
+    }
+}
 
 // ========== عرض المنتجات ==========
 function renderProducts() {
@@ -698,9 +817,16 @@ function renderProducts() {
     const q = document.getElementById('searchInput')?.value?.trim().toLowerCase();
     if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
     
-    grid.innerHTML = filtered.length ? filtered.map(p => `
+    grid.innerHTML = filtered.length ? filtered.map(p => {
+        const imgSrc = p.imageData || getProductImagePath(p.name);
+        return `
         <div class="pc" onclick="showProduct(${p.id})">
-            <div class="img"><img src="${p.image || 'https://dummyimage.com/300x300/0d9488/fff&text='+encodeURIComponent(p.name)}" alt="${p.name}" loading="lazy"></div>
+            <div class="img">
+                <img src="${imgSrc}" 
+                     alt="${p.name}" 
+                     loading="lazy"
+                     onerror="this.src='${getFallbackImage(p.name)}'">
+            </div>
             <div class="info">
                 <div class="cat">${getCatName(p.category)}</div>
                 <h3>${p.name}</h3>
@@ -708,8 +834,8 @@ function renderProducts() {
                 <div class="price">${p.priceRetail.toLocaleString()} ريال</div>
                 <button class="btn-cart" onclick="event.stopPropagation();addToCart(${p.id})">🛒 أضف للسلة</button>
             </div>
-        </div>
-    `).join('') : '<p style="grid-column:1/-1;text-align:center;padding:40px;">📭 لا توجد منتجات</p>';
+        </div>`;
+    }).join('') : '<p style="grid-column:1/-1;text-align:center;padding:40px;">📭 لا توجد منتجات</p>';
 }
 
 function getCatName(cat) {
@@ -728,9 +854,12 @@ function setCategory(cat, btn) {
 function showProduct(id) {
     const p = products.find(x => x.id === id);
     if (!p) return;
+    const imgSrc = p.imageData || getProductImagePath(p.name);
     document.getElementById('productContent').innerHTML = `
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
-            <img src="${p.image || 'https://dummyimage.com/300x300/0d9488/fff&text='+encodeURIComponent(p.name)}" style="width:200px;height:200px;object-fit:cover;border-radius:10px;">
+            <img src="${imgSrc}" 
+                 style="width:200px;height:200px;object-fit:cover;border-radius:10px;"
+                 onerror="this.src='${getFallbackImage(p.name)}'">
             <div style="flex:1;min-width:200px;">
                 <h3>${p.name}</h3>
                 <p>${p.desc}</p>
@@ -787,8 +916,9 @@ function renderCartItems() {
         if (!p) return '';
         const st = p.priceRetail * c.quantity;
         total += st;
+        const imgSrc = p.imageData || getProductImagePath(p.name);
         return `<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #f1f5f9;align-items:center;">
-            <img src="${p.image || 'https://dummyimage.com/50x50/0d9488/fff&text=?'}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;">
+            <img src="${imgSrc}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;" onerror="this.src='${getFallbackImage(p.name)}'">
             <div style="flex:1;font-size:12px;"><strong>${p.name}</strong><br>${p.priceRetail} × ${c.quantity}</div>
             <div style="font-weight:700;font-size:13px;">${st.toLocaleString()} ريال</div>
             <button onclick="removeFromCart(${p.id})" style="background:none;border:none;cursor:pointer;color:#ef4444;">🗑️</button>
@@ -861,11 +991,18 @@ function editProduct(id) {
     if (!p) return;
     document.getElementById('aname').value = p.name;
     document.getElementById('acat').value = p.category;
-    document.getElementById('aimg').value = p.image || '';
     document.getElementById('aprice').value = p.priceRetail;
     document.getElementById('awholesale').value = p.priceWholesale || '';
     document.getElementById('adesc').value = p.desc;
     document.getElementById('apamphlet').value = p.pamphlet || '';
+    
+    // عرض الصورة الحالية
+    if (p.imageData) {
+        document.getElementById('imagePreview').src = p.imageData;
+        document.getElementById('imagePreview').style.display = 'block';
+    }
+    
+    updateExpectedFileName();
     document.getElementById('adminPanel').dataset.editId = id;
 }
 
@@ -878,13 +1015,23 @@ function saveProduct() {
     const data = {
         name, 
         category: document.getElementById('acat').value,
-        image: document.getElementById('aimg').value,
         priceRetail: price,
         priceWholesale: parseFloat(document.getElementById('awholesale').value) || null,
         desc: document.getElementById('adesc').value,
         pamphlet: document.getElementById('apamphlet').value,
         fixedPrice: !document.getElementById('awholesale').value
     };
+    
+    // حفظ الصورة إذا تم تحميلها
+    if (uploadedImageData) {
+        data.imageData = uploadedImageData;
+    } else if (editId) {
+        // الاحتفاظ بالصورة السابقة
+        const oldProduct = products.find(x => x.id === parseInt(editId));
+        if (oldProduct && oldProduct.imageData) {
+            data.imageData = oldProduct.imageData;
+        }
+    }
     
     if (editId) {
         const idx = products.findIndex(x => x.id === parseInt(editId));
@@ -897,9 +1044,15 @@ function saveProduct() {
     saveProducts();
     renderProducts();
     renderAdminList();
+    
+    // إعادة تعيين النموذج
     document.getElementById('adminPanel').dataset.editId = '';
-    document.querySelectorAll('#adminPanel input, #adminPanel textarea').forEach(el => el.value = '');
-    toast('✅ تم الحفظ');
+    document.querySelectorAll('#adminPanel input:not([type=file]), #adminPanel textarea').forEach(el => el.value = '');
+    document.getElementById('imagePreview').style.display = 'none';
+    uploadedImageData = null;
+    updateExpectedFileName();
+    
+    toast('✅ تم حفظ المنتج بنجاح');
 }
 
 function deleteProduct(id) {
