@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وهيب فارما - الصيدلية الإلكترونية</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="وهيب فارما - صيدلية إلكترونية يمنية موثوقة. أدوية، مكملات، عناية بالبشرة، مستلزمات طبية. توصيل لجميع المدن اليمنية">
+    <meta name="keywords" content="صيدلية, أدوية, اليمن, صنعاء, وهيب فارما, مكملات غذائية, عناية بالبشرة">
+    <meta name="author" content="وهيب فارما">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="وهيب فارما - الصيدلية الإلكترونية">
+    <meta property="og:description" content="صيدلية إلكترونية يمنية - توصيل لجميع المدن">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="وهيب فارما">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💊</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --primary-light: #ccfbf1;
+            --gold: #c9a84c;
+            --gold-light: #fef3c7;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --red: #ef4444;
+            --green: #10b981;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* ========== TOP BAR ========== */
+        .top-bar {
+            background: var(--dark);
+            color: #e2e8f0;
+            padding: 10px 0;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .top-bar a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: var(--transition);
+            margin: 0 8px;
+        }
+        .top-bar a:hover {
+            color: var(--gold);
+        }
+        .top-bar .contact-info span {
+            margin: 0 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ltr-num {
+            direction: ltr;
+            unicode-bidi: embed;
+            display: inline-block;
+        }
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        }
+
+        /* ========== MAIN HEADER ========== */
+        .main-header {
+            background: var(--white);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .main-header.scrolled {
+            padding: 10px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), #14b8a6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
+            font-size: 28px;
+        }
+        .logo-text h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        .logo-text .subtitle {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .search-box {
+            flex: 1;
+            max-width: 450px;
+            position: relative;
+            min-width: 220px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: #f8fafc;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.08);
+            background: #fff;
+        }
+        .search-box .search-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .search-box .search-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-50%) scale(1.05);
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .btn-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+            color: var(--dark);
+        }
+        .btn-icon:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: scale(1.05);
+        }
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--red);
+            color: #fff;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+
+        /* ========== CATEGORY NAV ========== */
+        .cat-nav {
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 106px;
+            z-index: 999;
+        }
+        .cat-nav .container {
+            display: flex;
+            gap: 4px;
+            padding: 0 20px;
+        }
+        .cat-tab {
+            padding: 16px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray);
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            background: none;
+            font-family: 'Cairo', sans-serif;
+            white-space: nowrap;
+        }
+        .cat-tab:hover {
+            color: var(--primary);
+            background: #f0fdfa;
+        }
+        .cat-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: #f0fdfa;
+        }
+
+        /* ========== PROMO BANNER ========== */
+        .promo-banner {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 40%, #0f766e 100%);
+            color: #fff;
+            padding: 35px 0;
+            margin: 24px 0;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: -80px;
+            right: -60px;
+        }
+        .promo-banner::after {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -30px;
+        }
+        .promo-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 10px;
+        }
+        .promo-text h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+        .promo-text p {
+            opacity: 0.95;
+            font-size: 1.05rem;
+            margin-top: 6px;
+        }
+        .promo-badge {
+            background: var(--gold);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ========== SECTION TITLE ========== */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 35px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to left, #e2e8f0, transparent);
+            border-radius: 1px;
+        }
+
+        /* ========== PRODUCT GRID ========== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 24px;
+            margin: 20px 0;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid transparent;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        .product-card .img-wrap {
+            height: 220px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .product-card:hover .img-wrap img {
+            transform: scale(1.06);
+        }
+        .product-card .badge-stock {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--green);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+        .product-card .badge-featured {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--gold);
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+        .product-info {
+            padding: 18px;
+        }
+        .product-info .cat-label {
+            font-size: 0.7rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .product-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 4px 0;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        .product-info .desc {
+            font-size: 0.82rem;
+            color: var(--gray);
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .price-retail {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        .price-wholesale {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+        .price-wholesale-label {
+            font-size: 0.7rem;
+            background: var(--gold-light);
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        .btn-add-cart {
+            width: 100%;
+            margin-top: 8px;
+            padding: 12px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-add-cart:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
+        }
+
+        /* ========== INFO SECTIONS ========== */
+        .info-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+        .info-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid transparent;
+        }
+        .info-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .info-card .info-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 2.2rem;
+        }
+        .info-card h3 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .info-card ul {
+            font-size: 0.88rem;
+            color: var(--gray);
+            list-style: none;
+            padding: 0;
+            text-align: right;
+            line-height: 2;
+        }
+        .icon-payment { background: #eef2ff; color: #4f46e5; }
+        .icon-delivery { background: #fef3c7; color: #d97706; }
+        .icon-warranty { background: #d1fae5; color: #059669; }
+        
+        .bank-details-box {
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+        .bank-details-box h4 {
+            color: #065f46;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .bank-details-box p {
+            margin: 6px 0;
+            color: #1e293b;
+        }
+        .bank-details-box strong {
+            color: #0d9488;
+            font-size: 1.1rem;
+        }
+
+        /* ========== FOOTER ========== */
+        .site-footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            margin-bottom: 35px;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        .footer-col a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            padding: 4px 0;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        .footer-col a:hover {
+            color: var(--gold);
+            padding-right: 8px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #334155;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* ========== MODALS ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal {
+            background: #fff;
+            border-radius: var(--radius);
+            width: 94%;
+            max-width: 750px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            padding: 30px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: #f1f5f9;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            background: #fee2e2;
+            color: var(--red);
+        }
+        .product-detail {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .product-detail .detail-img {
+            width: 220px;
+            height: 220px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .pamphlet-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            margin-top: 18px;
+        }
+        .pamphlet-box h4 {
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+        .pamphlet-box p {
+            font-size: 0.88rem;
+            color: #78350f;
+            line-height: 1.8;
+        }
+
+        /* ========== CART SIDEBAR ========== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -430px;
+            width: 420px;
+            max-width: 90vw;
+            height: 100vh;
+            background: #fff;
+            z-index: 10000;
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.2);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            align-items: center;
+        }
+        .cart-item img {
+            width: 55px;
+            height: 55px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .cart-total {
+            padding: 20px;
+            border-top: 2px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: #f8fafc;
+        }
+        .btn-checkout {
+            padding: 16px;
+            background: var(--gold);
+            color: #fff;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            margin: 15px 20px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+        .btn-checkout:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+        .cart-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .cart-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            z-index: 99999;
+            background: #1e293b;
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ========== NO RESULTS ========== */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+            grid-column: 1/-1;
+        }
+        .no-results .icon-big {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .header-inner {
+                gap: 12px;
+            }
+            .search-box {
+                order: 3;
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+            .promo-text h2 {
+                font-size: 1.3rem;
+            }
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 14px;
+            }
+            .product-card .img-wrap {
+                height: 150px;
+            }
+            .product-info h3 {
+                font-size: 0.85rem;
+            }
+            .price-retail {
+                font-size: 0.95rem;
+            }
+            .cat-nav {
+                top: 135px;
+            }
+            .modal {
+                padding: 16px;
+            }
+            .product-detail .detail-img {
+                width: 130px;
+                height: 130px;
+            }
+            .cart-sidebar {
+                width: 100%;
+                right: -105%;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+                border-radius: 12px;
+                font-size: 22px;
+            }
+            .cat-tab {
+                padding: 12px 14px;
+                font-size: 0.78rem;
+            }
+            .promo-badge {
+                font-size: 0.8rem;
+                padding: 8px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== TOP BAR ==================== -->
+<div class="top-bar">
+    <div class="container">
+        <div class="contact-info">
+            <span><span class="pulse-dot"></span> متاحون 24/7</span>
+            <span>📞 <a href="tel:+967775190992"><span class="ltr-num">775190992</span></a></span>
+            <span>✉️ <a href="mailto:775190992.wa@gmail.com">775190992.wa@gmail.com</a></span>
+            <span>📍 صنعاء، اليمن</span>
+        </div>
+        <div>
+            <a href="#" onclick="scrollToSection('payment-section')">💳 وسائل الدفع</a>
+            <a href="#" onclick="scrollToSection('delivery-section')">🚚 التوصيل</a>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== MAIN HEADER ==================== -->
+<header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+        <a href="/" class="logo-section">
+            <div class="logo-icon">💊</div>
+            <div class="logo-text">
+                <h1>وهيب فارما</h1>
+                <div class="subtitle">WHEEB PHARMA</div>
+            </div>
+        </a>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن دواء، مكمل، أو منتج..." oninput="filterProducts()">
+            <button class="search-btn" onclick="filterProducts()">🔍</button>
+        </div>
+        <div class="header-actions">
+            <button class="btn-icon" onclick="toggleCart()" title="سلة التسوق">
+                🛒<span class="badge" id="cartCount">0</span>
+            </button>
+            <button class="btn-icon" onclick="showToast('❤️ قائمة المفضلة - قريباً')" title="المفضلة">❤️</button>
+        </div>
+    </div>
+</header>
+
+<!-- ==================== CATEGORY NAV ==================== -->
+<nav class="cat-nav" id="catNav">
+    <div class="container">
+        <button class="cat-tab active" data-cat="all" onclick="setCategory('all', this)">📋 الكل</button>
+        <button class="cat-tab" data-cat="medications" onclick="setCategory('medications', this)">💊 الأدوية</button>
+        <button class="cat-tab" data-cat="supplements" onclick="setCategory('supplements', this)">💪 المكملات</button>
+        <button class="cat-tab" data-cat="skincare" onclick="setCategory('skincare', this)">✨ العناية بالبشرة</button>
+        <button class="cat-tab" data-cat="medical-supplies" onclick="setCategory('medical-supplies', this)">🩺 المستلزمات الطبية</button>
+        <button class="cat-tab" data-cat="baby-care" onclick="setCategory('baby-care', this)">🍼 رعاية الأطفال</button>
+    </div>
+</nav>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main class="container">
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <div class="promo-content">
+            <div class="promo-text">
+                <h2>🩺 صيدليتك الموثوقة في اليمن</h2>
+                <p>توصيل سريع لجميع المدن | منتجات أصلية 100% | استشارة دوائية مجانية</p>
+            </div>
+            <div class="promo-badge">🚚 توصيل مجاني للطلبات +2,000 ريال</div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <h2 class="section-title" id="productsSectionTitle">📦 جميع المنتجات</h2>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="no-results" id="noResults" style="display:none;">
+        <span class="icon-big">📭</span>
+        <h3>لا توجد منتجات مطابقة</h3>
+        <p>جرب تعديل معايير البحث أو اختر تصنيفاً آخر</p>
+    </div>
+
+    <!-- Info Sections -->
+    <div class="info-sections">
+        <div class="info-card" id="payment-section">
+            <div class="info-icon icon-payment">💳</div>
+            <h3>وسائل الدفع</h3>
+            <ul>
+                <li>✅ بطاقات الائتمان (فيزا - ماستركارد - مدى)</li>
+                <li>✅ Apple Pay / Google Pay</li>
+                <li>✅ تحويل بنكي (اعتماد بنكي)</li>
+                <li>✅ الدفع عند الاستلام</li>
+                <li>✅ التقسيط عبر تمارا</li>
+            </ul>
+            <div class="bank-details-box">
+                <h4>📌 بيانات التحويل المحلي:</h4>
+                <p>🏧 <strong>ون كاش:</strong> <span class="ltr-num">775190992</span></p>
+                <p>📝 <strong>حواله باسم:</strong> وهيب حسن علي محمد المعمري</p>
+                <p>📧 <strong>البريد:</strong> <a href="mailto:775190992.wa@gmail.com">775190992.wa@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="info-card" id="delivery-section">
+            <div class="info-icon icon-delivery">🚚</div>
+            <h3>خدمات التوصيل</h3>
+            <ul>
+                <li>🚀 توصيل فوري (خلال ساعتين) - مدفوع</li>
+                <li>📦 توصيل عادي (1-3 أيام) - مجاني للطلبات +2,000 ريال</li>
+                <li>🏠 استلام من الفرع - صنعاء</li>
+                <li>📍 تغطية جميع المدن اليمنية الرئيسية</li>
+                <li>🔒 تعقب الشحنة أونلاين</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <div class="info-icon icon-warranty">🛡️</div>
+            <h3>ضمانات الجودة</h3>
+            <ul>
+                <li>🏅 منتجات أصلية 100% من المصدر</li>
+                <li>🔄 استرجاع خلال 14 يوم من الاستلام</li>
+                <li>💰 استعادة كاملة للمبلغ المدفوع</li>
+                <li>📜 فواتير رسمية معتمدة</li>
+                <li>🔒 خصوصية وأمان بيانات العملاء</li>
+                <li>📞 دعم فني على مدار الساعة</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>🏥 وهيب فارما</h4>
+                <p style="font-size:0.85rem;line-height:1.8;">صيدليتك الإلكترونية الموثوقة في الجمهورية اليمنية. نوفر الأدوية والمكملات والمستلزمات الطبية بأعلى جودة وأفضل الأسعار.</p>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <a href="#">الرئيسية</a>
+                <a href="#" onclick="setCategory('medications', document.querySelector('[data-cat=medications]'))">الأدوية</a>
+                <a href="#" onclick="setCategory('supplements', document.querySelector('[data-cat=supplements]'))">المكملات</a>
+                <a href="#" onclick="setCategory('skincare', document.querySelector('[data-cat=skincare]'))">العناية بالبشرة</a>
+                <a href="#" onclick="scrollToSection('payment-section')">وسائل الدفع</a>
+            </div>
+            <div class="footer-col">
+                <h4>خدمة العملاء</h4>
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">شروط الاستخدام</a>
+                <a href="#">سياسة الاسترجاع والاستبدال</a>
+                <a href="#">الأسئلة الشائعة</a>
+                <a href="#">اتصل بنا</a>
+            </div>
+            <div class="footer-col">
+                <h4>تواصل معنا</h4>
+                <p style="font-size:0.85rem;line-height:2;">
+                    📞 <span class="ltr-num">775190992</span><br>
+                    ✉️ 775190992.wa@gmail.com<br>
+                    📍 صنعاء، الجمهورية اليمنية<br>
+                    🕐 ساعات العمل: 24/7
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 وهيب فارما - جميع الحقوق محفوظة | تطوير: عين الكترونية التقنية
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+<div class="modal-overlay" id="productModalOverlay">
+    <div class="modal" id="productModal">
+        <button class="modal-close" onclick="closeProductModal()">✕</button>
+        <div id="productModalContent"></div>
+    </div>
+</div>
+
+<!-- ==================== CART SIDEBAR ==================== -->
+<div class="cart-backdrop" id="cartBackdrop" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>🛒 سلة التسوق</h3>
+        <button class="modal-close" style="position:static;" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <p style="color:var(--gray);text-align:center;padding:60px 20px;">السلة فارغة حالياً</p>
+    </div>
+    <div class="cart-total" id="cartTotal">الإجمالي: 0 ريال يمني</div>
+    <button class="btn-checkout" onclick="checkout()">💳 إتمام الشراء</button>
+</div>
+
+<!-- ==================== TOAST ==================== -->
+<div class="toast" id="globalToast"></div>
+
+<script>
+    // ========== PRODUCTS DATA ==========
+    const products = [
+        { id: 100, name: 'المنتج المميز (صورة من Google Drive)', category: 'medications', image: 'https://drive.google.com/uc?export=view&id=1SeZ9Av1hiKd0UX5-xHXS3s_DBHfZoTxz', priceRetail: 1500, priceWholesale: 1200, desc: 'منتج خاص تم استيراد صورته من Google Drive', pamphlet: 'هذا المنتج يظهر في أول المتجر مع صورته الأصلية من Google Drive. يمكنك تعديل تفاصيله من خلال لوحة التحكم.', fixedPrice: false, featured: true },
+        { id: 1, name: 'بنادول أزرق (باراسيتامول 500mg)', category: 'medications', image: 'https://dummyimage.com/400x400/0d9488/ffffff&text=Panadol+500mg', priceRetail: 450, priceWholesale: 380, desc: 'مسكن ألم وخافض حرارة فعال', pamphlet: 'يحتوي على 500mg باراسيتامول. الجرعة: 1-2 قرص كل 6-8 ساعات. لا تتجاوز 8 أقراص يومياً. يحفظ في درجة حرارة الغرفة.', fixedPrice: false, featured: true },
+        { id: 2, name: 'فيتامين د3 1000 وحدة دولية', category: 'supplements', image: 'https://dummyimage.com/400x400/f59e0b/ffffff&text=Vitamin+D3+1000IU', priceRetail: 650, priceWholesale: 550, desc: 'مكمل غذائي لتقوية العظام والمناعة', pamphlet: 'كبسولات جيلاتينية ناعمة. الجرعة: كبسولة واحدة يومياً مع الطعام. مناسب للبالغين. استشر الطبيب أثناء الحمل.', fixedPrice: false, featured: false },
+        { id: 3, name: 'كريم مرطب سيتافيل 250مل', category: 'skincare', image: 'https://dummyimage.com/400x400/8b5cf6/ffffff&text=Cetaphil+Moisturizer', priceRetail: 890, priceWholesale: null, desc: 'مرطب للبشرة الجافة والحساسة', pamphlet: 'خالي من العطور والبارابين. يستخدم يومياً صباحاً ومساءً. مناسب لجميع أنواع البشرة. آمن للأطفال والرضع.', fixedPrice: true, featured: false },
+        { id: 4, name: 'جهاز قياس ضغط الدم الرقمي', category: 'medical-supplies', image: 'https://dummyimage.com/400x400/ef4444/ffffff&text=BP+Monitor+Digital', priceRetail: 1990, priceWholesale: 1700, desc: 'جهاز إلكتروني مع شاشة LCD كبيرة', pamphlet: 'بطارية قابلة للشحن. دقة ±3 mmHg. يشمل كف قابل للتعديل. ذاكرة 90 قراءة. ضمان سنتين.', fixedPrice: false, featured: true },
+        { id: 5, name: 'حليب أطفال نان 1 (0-6 شهور)', category: 'baby-care', image: 'https://dummyimage.com/400x400/10b981/ffffff&text=NAN+1+Formula', priceRetail: 750, priceWholesale: 650, desc: 'حليب بودرة للرضع - 800جم', pamphlet: 'يحتوي على بروتين محسن. يحضر بخلط مكيال واحد مع 30مل ماء دافئ. يحفظ في مكان بارد وجاف. يستخدم خلال 3 أسابيع من الفتح.', fixedPrice: false, featured: false },
+        { id: 6, name: 'أوميغا 3 زيت سمك مركز', category: 'supplements', image: 'https://dummyimage.com/400x400/3b82f6/ffffff&text=Omega+3+Fish+Oil', priceRetail: 950, priceWholesale: 800, desc: 'كبسولات زيت سمك EPA/DHA', pamphlet: 'الجرعة: كبسولتين يومياً مع الطعام. يدعم صحة القلب والدماغ والمفاصل. خالي من الزئبق والمعادن الثقيلة.', fixedPrice: false, featured: false },
+        { id: 7, name: 'واقي شمس لاروش بوزيه SPF50+', category: 'skincare', image: 'https://dummyimage.com/400x400/f97316/ffffff&text=La+Roche+SPF50', priceRetail: 1200, priceWholesale: null, desc: 'حماية عالية للبشرة الدهنية والحساسة', pamphlet: 'خالي من الزيوت والعطور. مقاوم للماء. يجدد كل ساعتين. مناسب للبشرة الحساسة والمعرضة للحبوب.', fixedPrice: true, featured: false },
+        { id: 8, name: 'إبر أنسولين قلم 4مم (100 إبرة)', category: 'medical-supplies', image: 'https://dummyimage.com/400x400/6366f1/ffffff&text=Insulin+Pen+Needles', priceRetail: 550, priceWholesale: 450, desc: 'علبة 100 إبرة دقيقة للاستخدام الواحد', pamphlet: 'معقمة للاستخدام الواحد. متوافقة مع معظم أقلام الأنسولين. لا تشارك الإبر مع الآخرين. تخزن في درجة حرارة الغرفة.', fixedPrice: false, featured: false },
+        { id: 9, name: 'شراب بروسبان للسعال 120مل', category: 'medications', image: 'https://dummyimage.com/400x400/14b8a6/ffffff&text=Prospan+Cough+Syrup', priceRetail: 320, priceWholesale: 260, desc: 'مستخلص أوراق اللبلاب الطبيعي', pamphlet: 'الجرعة: 5مل ثلاث مرات يومياً للبالغين. مناسب من عمر سنتين. رج العبوة جيداً قبل الاستخدام. خالي من الكحول والسكر.', fixedPrice: false, featured: false },
+        { id: 10, name: 'مكمل مغنيسيوم جليسينات 400mg', category: 'supplements', image: 'https://dummyimage.com/400x400/a855f7/ffffff&text=Magnesium+Glycinate', priceRetail: 700, priceWholesale: 580, desc: 'مغنيسيوم عالي الامتصاص للعضلات والنوم', pamphlet: 'الجرعة: قرص واحد مساءً. يساعد على استرخاء العضلات وتحسين النوم. مناسب للرياضيين. نباتي وخالي من الجلوتين.', fixedPrice: false, featured: false },
+        { id: 11, name: 'حفائظ بيبي جوي مقاس 3 (56 حبة)', category: 'baby-care', image: 'https://dummyimage.com/400x400/ec4899/ffffff&text=Baby+Joy+Diapers+Size+3', priceRetail: 850, priceWholesale: 720, desc: 'حفائظ أطفال - تسرب محكم ومقاس مناسب', pamphlet: 'مقاس 3 (4-9 كجم). طبقة ماصة جافة لمدة 12 ساعة. خالي من الكلور واللاتكس. مؤشر بلل لتغيير الحفائظ.', fixedPrice: false, featured: false },
+        { id: 12, name: 'جهاز بخار منزلي (نبيولايزر)', category: 'medical-supplies', image: 'https://dummyimage.com/400x400/64748b/ffffff&text=Nebulizer+Compressor', priceRetail: 2500, priceWholesale: 2100, desc: 'نبيولايزر ضاغط مع قناع للكبار والأطفال', pamphlet: 'ضوضاء منخفضة. يشمل قناع بالغ وطفل. معدل تدفق عالي. سهل التنظيف. ضمان 3 سنوات.', fixedPrice: false, featured: false },
+        { id: 13, name: 'مرهم فيوسيكورت (فيوسيدك أسيد + بيتاميثازون)', category: 'medications', image: 'https://dummyimage.com/400x400/d946ef/ffffff&text=Fucicort+Ointment', priceRetail: 380, priceWholesale: 310, desc: 'مضاد حيوي وكورتيزون للالتهابات الجلدية', pamphlet: 'يوضع طبقة رقيقة على المنطقة المصابة مرتين يومياً. لا يستخدم على الوجه لفترة طويلة. للاستعمال الخارجي فقط.', fixedPrice: false, featured: false },
+        { id: 14, name: 'حبوب زنتاك 150mg (رانيتيدين)', category: 'medications', image: 'https://dummyimage.com/400x400/f43f5e/ffffff&text=Zantac+150mg', priceRetail: 280, priceWholesale: 230, desc: 'لعلاج الحموضة وقرحة المعدة', pamphlet: 'قرص واحد قبل الأكل بنصف ساعة. لا يستخدم لأكثر من 14 يوماً دون استشارة الطبيب. يحفظ في مكان بارد وجاف.', fixedPrice: false, featured: false },
+        { id: 15, name: 'جهاز قياس السكر في الدم', category: 'medical-supplies', image: 'https://dummyimage.com/400x400/22d3ee/ffffff&text=Blood+Glucose+Meter', priceRetail: 1800, priceWholesale: 1500, desc: 'جهاز مراقبة نسبة السكر مع 50 شريط اختبار', pamphlet: 'نتيجة خلال 5 ثواني. ذاكرة 500 قراءة. يشمل وخزات و50 شريط. بطارية تدوم طويلاً.', fixedPrice: false, featured: false }
+    ];
+
+    // ========== STATE ==========
+    let cart = JSON.parse(localStorage.getItem('wheeb_cart') || '[]');
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    // ========== INIT ==========
+    function init() {
+        renderProducts();
+        updateCartUI();
+    }
+
+    // ========== RENDER ==========
+    function getCategoryName(cat) {
+        const map = {
+            'medications': 'أدوية',
+            'supplements': 'مكملات',
+            'skincare': 'عناية بالبشرة',
+            'medical-supplies': 'مستلزمات طبية',
+            'baby-care': 'رعاية الأطفال'
+        };
+        return map[cat] || cat;
+    }
+
+    function renderProducts() {
+        let filtered = [...products];
+        
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === currentCategory);
+        }
+        
+        if (searchQuery.trim()) {
+            const q = searchQuery.trim().toLowerCase();
+            filtered = filtered.filter(p => 
+                p.name.toLowerCase().includes(q) || 
+                p.desc.toLowerCase().includes(q) ||
+                getCategoryName(p.category).includes(q)
+            );
+        }
+
+        const grid = document.getElementById('productsGrid');
+        const noResults = document.getElementById('noResults');
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            noResults.style.display = 'block';
+            return;
+        }
+
+        noResults.style.display = 'none';
+
+        grid.innerHTML = filtered.map(p => {
+            const hasWholesale = p.priceWholesale !== null && p.priceWholesale !== undefined && !p.fixedPrice;
+            return `
+            <div class="product-card" onclick="openProductDetail(${p.id})">
+                <div class="img-wrap">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy" 
+                         onerror="this.src='https://dummyimage.com/400x400/0d9488/ffffff&text=${encodeURIComponent(p.name.substring(0, 20))}'">
+                    <span class="badge-stock">✓ متوفر</span>
+                    ${p.featured ? '<span class="badge-featured">⭐ مميز</span>' : ''}
+                </div>
+                <div class="product-info">
+                    <div class="cat-label">${getCategoryName(p.category)}</div>
+                    <h3>${p.name}</h3>
+                    <p class="desc">${p.desc}</p>
+                    <div class="price-row">
+                        <span class="price-retail">${p.priceRetail.toLocaleString()} ريال</span>
+                        ${hasWholesale ? `<span class="price-wholesale">${p.priceWholesale.toLocaleString()} ريال</span><span class="price-wholesale-label">جملة</span>` : ''}
+                        ${p.fixedPrice ? '<span class="price-wholesale-label" style="background:#e0e7ff;color:#3730a3;">سعر ثابت</span>' : ''}
+                    </div>
+                    <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})">
+                        🛒 أضف إلى السلة
+                    </button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function filterProducts() {
+        searchQuery = document.getElementById('searchInput').value;
+        renderProducts();
+    }
+
+    function setCategory(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        document.getElementById('productsSectionTitle').textContent = 
+            cat === 'all' ? '📦 جميع المنتجات' : `📦 ${getCategoryName(cat)}`;
+        renderProducts();
+        document.getElementById('productsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ========== PRODUCT DETAIL ==========
+    function openProductDetail(id) {
+        const p = products.find(pr => pr.id === id);
+        if (!p) return;
+        
+        const hasWholesale = p.priceWholesale !== null && p.priceWholesale !== undefined && !p.fixedPrice;
+        
+        document.getElementById('productModalContent').innerHTML = `
+        <div class="product-detail">
+            <img src="${p.image}" alt="${p.name}" class="detail-img" 
+                 onerror="this.src='https://dummyimage.com/400x400/0d9488/ffffff&text=${encodeURIComponent(p.name.substring(0, 20))}'">
+            <div style="flex:1;min-width:220px;">
+                <div class="cat-label">${getCategoryName(p.category)}</div>
+                <h3 style="font-size:1.3rem;margin:8px 0;">${p.name}</h3>
+                <p style="color:var(--gray);">${p.desc}</p>
+                <div class="price-row" style="margin:14px 0;">
+                    <span class="price-retail">سعر القطاعي: ${p.priceRetail.toLocaleString()} ريال يمني</span>
+                    ${hasWholesale ? `<br><span>سعر الجملة: ${p.priceWholesale.toLocaleString()} ريال يمني</span>` : ''}
+                    ${p.fixedPrice ? '<br><span class="price-wholesale-label" style="background:#e0e7ff;color:#3730a3;">سعر ثابت</span>' : '<br><span class="price-wholesale-label">يتغير حسب الكمية</span>'}
+                </div>
+                <button class="btn-add-cart" style="width:auto;padding:12px 30px;" onclick="addToCart(${p.id});closeProductModal();">
+                    🛒 أضف إلى السلة
+                </button>
+            </div>
+        </div>
+        <div class="pamphlet-box">
+            <h4>📄 النشرة الدوائية / التفاصيل</h4>
+            <p>${p.pamphlet || 'لا توجد تفاصيل إضافية لهذا المنتج.'}</p>
+        </div>`;
+        
+        document.getElementById('productModalOverlay').classList.add('active');
+    }
+
+    function closeProductModal() {
+        document.getElementById('productModalOverlay').classList.remove('active');
+    }
+
+    // ========== CART ==========
+    function addToCart(productId) {
+        const existing = cart.find(c => c.productId === productId);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ productId, quantity: 1 });
+        }
+        saveCart();
+        updateCartUI();
+        
+        const cartBtn = document.querySelector('.btn-icon[title="سلة التسوق"]');
+        if (cartBtn) {
+            cartBtn.style.transform = 'scale(1.3)';
+            setTimeout(() => cartBtn.style.transform = '', 200);
+        }
+        showToast('✅ تمت الإضافة إلى السلة بنجاح');
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(c => c.productId !== productId);
+        saveCart();
+        updateCartUI();
+        renderCartItems();
+        showToast('🗑️ تم حذف المنتج من السلة');
+    }
+
+    function saveCart() {
+        localStorage.setItem('wheeb_cart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const count = cart.reduce((sum, c) => sum + c.quantity, 0);
+        document.getElementById('cartCount').textContent = count;
+    }
+
+    function renderCartItems() {
+        const container = document.getElementById('cartItems');
+        
+        if (cart.length === 0) {
+            container.innerHTML = '<p style="color:var(--gray);text-align:center;padding:60px 20px;">السلة فارغة حالياً</p>';
+            document.getElementById('cartTotal').textContent = 'الإجمالي: 0 ريال يمني';
+            return;
+        }
+
+        let total = 0;
+        container.innerHTML = cart.map(c => {
+            const p = products.find(pr => pr.id === c.productId);
+            if (!p) return '';
+            const subtotal = p.priceRetail * c.quantity;
+            total += subtotal;
+            return `
+            <div class="cart-item">
+                <img src="${p.image}" alt="${p.name}" 
+                     onerror="this.src='https://dummyimage.com/55x55/0d9488/ffffff&text=?'">
+                <div style="flex:1;">
+                    <strong style="font-size:0.85rem;">${p.name}</strong>
+                    <div style="font-size:0.75rem;color:var(--gray);">${p.priceRetail.toLocaleString()} ريال × ${c.quantity}</div>
+                </div>
+                <div style="font-weight:700;">${subtotal.toLocaleString()} ريال</div>
+                <button onclick="removeFromCart(${p.id})" 
+                        style="background:none;border:none;cursor:pointer;color:var(--red);font-size:1.2rem;">🗑️</button>
+            </div>`;
+        }).join('');
+
+        document.getElementById('cartTotal').textContent = `الإجمالي: ${total.toLocaleString()} ريال يمني`;
+    }
+
+    function toggleCart() {
+        const sidebar = document.getElementById('cartSidebar');
+        const backdrop = document.getElementById('cartBackdrop');
+        const isOpen = sidebar.classList.contains('open');
+        
+        if (isOpen) {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('active');
+        } else {
+            renderCartItems();
+            sidebar.classList.add('open');
+            backdrop.classList.add('active');
+        }
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            showToast('⚠️ السلة فارغة - أضف منتجات أولاً');
+            return;
+        }
+
+        const total = cart.reduce((sum, c) => {
+            const p = products.find(pr => pr.id === c.productId);
+            return sum + (p ? p.priceRetail * c.quantity : 0);
+        }, 0);
+
+        const deliveryFee = total >= 2000 ? 0 : 250;
+        const grandTotal = total + deliveryFee;
+
+        const message = `
+🛒 ملخص الطلب من وهيب فارما:
+━━━━━━━━━━━━━━━━━
+📦 إجمالي المنتجات: ${total.toLocaleString()} ريال
+🚚 رسوم التوصيل: ${deliveryFee === 0 ? 'مجاني 🎉' : deliveryFee.toLocaleString() + ' ريال'}
+💰 الإجمالي الكلي: ${grandTotal.toLocaleString()} ريال يمني
+━━━━━━━━━━━━━━━━━
+📌 للتحويل:
+• ون كاش: 775190992
+• حواله: وهيب حسن علي محمد المعمري
+• البريد: 775190992.wa@gmail.com
+━━━━━━━━━━━━━━━━━
+شكراً لثقتكم بوهيب فارما 💊`;
+
+        alert(message);
+        
+        cart = [];
+        saveCart();
+        updateCartUI();
+        toggleCart();
+        showToast('🎉 تم تقديم الطلب بنجاح! سنتواصل معك قريباً');
+    }
+
+    // ========== TOAST ==========
+    function showToast(msg) {
+        const toast = document.getElementById('globalToast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    // ========== HELPERS ==========
+    function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // ========== EVENT LISTENERS ==========
+    document.getElementById('productModalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeProductModal();
+    });
+
+    document.getElementById('cartBackdrop').addEventListener('click', toggleCart);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeProductModal();
+            if (document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
+        }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('mainHeader');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // ========== START ==========
+    init();
+    console.log('🏥 وهيب فارما - الصيدلية الإلكترونية جاهزة للاستخدام');
+    console.log('📞 للتواصل: 775190992');
+    console.log('💳 ون كاش: 775190992');
+    console.log('📍 صنعاء، الجمهورية اليمنية');
+</script>
+
+</body>
+</html>
